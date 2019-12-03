@@ -1,0 +1,31 @@
+<div id=fields>
+    <mat-form-field id='fieldOne'>
+        <mat-label>Pick X-Axis Data</mat-label>
+        <mat-select [(ngModel)]="selectedValue1">
+            <mat-option *ngFor="let Data of datas" [value]="Data.viewValue">
+                {{Data.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field id='fieldTwo'>
+            <mat-label>Pick Y-Axis Data</mat-label>
+            <mat-select [(ngModel)]="selectedValue2">
+                <mat-option *ngFor="let Data of datas" [value]="Data.viewValue">
+                    {{Data.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+</div>
+
+<div id=submitButton>
+    <button mat-raised-button (click)="buttonPress()">Submit</button>
+</div>
+
+<div *ngIf="chart">
+    <canvas #canvas id="canvas">{{ chart }}</canvas>
+</div>
+
+<div class="center-div" id=graph style="width: 50%">
+    <canvas id="canvas"></canvas>
+</div>
