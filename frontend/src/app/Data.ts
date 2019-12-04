@@ -1,4 +1,4 @@
 export interface IData {
-    x_var: String;
-    y_var: string;
+    x: string[];
+    y: string[];
 }

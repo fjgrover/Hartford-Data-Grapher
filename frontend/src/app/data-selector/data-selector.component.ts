@@ -1,6 +1,6 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { RequestService } from '../request.service';
-import { Chart } from 'chart.js';
+import { Component, OnInit } from '@angular/core';
+import { GraphService } from '../graph/graph.service';
+import { GraphComponent } from '../graph/graph.component';
 
 export interface Data {
   value: number;
@@ -13,7 +13,7 @@ export interface Data {
   styleUrls: ['./data-selector.component.css']
 })
 
-export class DataSelectorComponent implements OnInit{
+export class DataSelectorComponent implements OnInit {
 
   datas: Data[] = [
     {value: 1, viewValue: 'LOSS_EVNT_NUM'},
@@ -75,55 +75,11 @@ export class DataSelectorComponent implements OnInit{
 
   public data;
 
-  constructor(private requestService: RequestService) { }
+  constructor( private graphService: GraphService, private graphComponent: GraphComponent ) { }
 
-  chart = [];
+ buttonPress() {
+   this.graphService.updateGraph( this.selectedValue1, this.selectedValue2 );
+ }
 
-  buttonPress() {
-    this.data = this.requestService.getData(this.selectedValue1, this.selectedValue2)
-      .subscribe(resp => {
-        this.data = resp;
-
-        console.log(resp);
-      });
-
-      this.updateChart(this.chart, this.selectedValue1, this.data.body['x'])
-  }
-
-  graphBuilder(variableOne, variableTwo){
-    this.chart = new Chart('canvas', {
-      type: 'line',
-      data: {
-        labels: ['CA', 'CT', 'CO', 'KY', 'MD', 'FL', 'MI', 'NY', 'AZ', 'RI', 'CA', 'NY', 'TX', 'MD', 'WA', 'UT', 'MN', 'CA', 'CA', 'TX'],
-        datasets: [
-          {
-            label: variableOne,
-            data: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10, 10, 10, 10],
-            backgroundColor: 'red',
-            borderColor: 'red',
-            fill: false,
-          },
-          // {
-          //   label: variableTwo,
-          //   data: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
-          //   backgroundColor: 'blue',
-          //   borderColor: 'blue',
-          //   fill: false,
-          // },
-        ]
-      }
-    })
-  }
-
-  updateChart(chart, label0, data0){
-    chart.data.datasets[0].label = label0;
-    // chart.data.datasets[1].label = label1;
-    chart.data.datasets[0].data = data0;
-    // chart.data.datasets[1].data = data1;
-    chart.update();
-  }
-
-  ngOnInit(){
-    this.graphBuilder('var-1','var-2')
-  }
+  ngOnInit() { }
 }

@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GraphService } from './graph.service';
 import { Chart } from 'chart.js';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
-  styleUrls: [ './graph.component.css' ],
-  providers: [ GraphService ]
+  styleUrls: [ './graph.component.css' ]
 })
 export class GraphComponent implements OnInit {
 
-  private graphData;
+  private graphData: {
+    x: {},
+    y: {}
+  };
 
-  constructor( private graphService: GraphService ) {  }
+  constructor( public graphService: GraphService ) {  }
 
-  ngOnInit() {
-    //this.graphService.graphData.subscribe(graphData => this.graphData = graphData);
+  ngOnInit() { }
+
+  updateGraph() {
+    this.graphData = this.graphService.getGraphData();
+    console.log( this.graphData );
   }
 }

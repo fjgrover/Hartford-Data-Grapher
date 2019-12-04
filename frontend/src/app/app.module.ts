@@ -11,12 +11,15 @@ import { RequestService } from './request.service';
 import { MatSelectModule,
   MatButtonModule,
   MatToolbarModule } from '@angular/material';
+import { GraphComponent } from './graph/graph.component';
+import { GraphService } from './graph/graph.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DataSelectorComponent,
-    ToolBarComponent
+    ToolBarComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { MatSelectModule,
     FormsModule
   ],
   providers: [
-    RequestService
+    RequestService,
+    GraphService
   ],
   bootstrap: [AppComponent]
 })

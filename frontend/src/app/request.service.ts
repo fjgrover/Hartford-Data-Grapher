@@ -7,10 +7,10 @@ import { IData } from './Data';
 
 export class RequestService {
 
-  constructor(private http: HttpClient) { }
+  constructor( private http: HttpClient ) { }
 
-  getData(xVar: string, yVar: string): Observable<HttpResponse<IData[]>> {
+  getData( xVar: string, yVar: string ): Observable< HttpResponse< IData > > {
 
-    return this.http.get<IData[]>('http://localhost:3000/get/?x_var=' + xVar + '&y_var=' + yVar, { observe: 'response' } );
+    return this.http.get< IData >( 'http://localhost:3000/get/?x_var=' + xVar + '&y_var=' + yVar, { observe: 'response' } );
   }
 }
