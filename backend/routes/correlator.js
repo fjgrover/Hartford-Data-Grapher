@@ -5,7 +5,7 @@ const DriverInfo = require( '../models/DriverInfo' );
 
 router.get( '/', async ( req, res ) => {
     try {
-        console.log( "request to: " + req.originalUrl );
+        console.log( req.connection.localAddress + ": request to " + req.originalUrl );
         const urlParams = await new URLSearchParams( req.query );
         const x_var = urlParams.get( 'x_var' );
         const y_var = urlParams.get( 'y_var' );
