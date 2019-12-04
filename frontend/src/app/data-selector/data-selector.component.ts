@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphService } from '../graph/graph.service';
-import { GraphComponent } from '../graph/graph.component';
 
 export interface Data {
   value: number;
@@ -75,7 +74,7 @@ export class DataSelectorComponent implements OnInit {
 
   public data;
 
-  constructor( private graphService: GraphService, private graphComponent: GraphComponent ) { }
+  constructor( private graphService: GraphService ) { }
 
  buttonPress() {
    this.graphService.updateGraph( this.selectedValue1, this.selectedValue2 );

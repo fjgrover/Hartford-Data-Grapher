@@ -24,6 +24,9 @@ export class GraphService {
       });
 
       this.graphData = { x : xCounts, y : yCounts };
+
+      // dump graphData for demo
+      console.log( this.graphData );
     });
   }
 
