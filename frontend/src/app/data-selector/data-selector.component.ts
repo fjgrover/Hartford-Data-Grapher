@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphService } from '../graph/graph.service';
+import { GraphComponent } from '../graph/graph.component';
 
 export interface Data {
   value: number;
@@ -9,7 +9,8 @@ export interface Data {
 @Component({
   selector: 'app-data-selector',
   templateUrl: './data-selector.component.html',
-  styleUrls: ['./data-selector.component.css']
+  styleUrls: [ './data-selector.component.css' ],
+  providers: [ GraphComponent ]
 })
 
 export class DataSelectorComponent implements OnInit {
@@ -74,11 +75,11 @@ export class DataSelectorComponent implements OnInit {
 
   public data;
 
-  constructor( private graphService: GraphService ) { }
+  constructor( private graphComponent: GraphComponent ) { }
 
- buttonPress() {
-   this.graphService.updateGraph( this.selectedValue1, this.selectedValue2 );
- }
+  buttonPress() {
+    this.graphComponent.updateGraph( this.selectedValue1, this.selectedValue2 );
+  }
 
   ngOnInit() { }
 }

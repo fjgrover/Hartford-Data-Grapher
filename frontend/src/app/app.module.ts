@@ -12,7 +12,6 @@ import { MatSelectModule,
   MatButtonModule,
   MatToolbarModule } from '@angular/material';
 import { GraphComponent } from './graph/graph.component';
-import { GraphService } from './graph/graph.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { GraphService } from './graph/graph.service';
   ],
   providers: [
     RequestService,
-    GraphService
   ],
   bootstrap: [AppComponent]
 })
