@@ -1,27 +1,27 @@
 <div id=fields>
-    <mat-form-field id='fieldOne'>
-        <mat-label>Pick X-Axis Data</mat-label>
-        <mat-select [(ngModel)]="selectedValue1">
-            <mat-option *ngFor="let Data of datas" [value]="Data.viewValue">
-                {{Data.viewValue}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+  <mat-form-field id='fieldOne'>
+    <mat-label>Select query</mat-label>
+    <mat-select [(ngModel)]="selectedValue1">
+      <mat-option *ngFor="let query of querySelection" [value]="query">
+        {{query}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <mat-form-field id='fieldTwo'>
-            <mat-label>Pick Y-Axis Data</mat-label>
-            <mat-select [(ngModel)]="selectedValue2">
-                <mat-option *ngFor="let Data of datas" [value]="Data.viewValue">
-                    {{Data.viewValue}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+  <mat-form-field id='fieldTwo'>
+    <mat-label>Select a state filter</mat-label>
+    <mat-select [(ngModel)]="selectedValue2">
+      <mat-option *ngFor="let State of states" [value]="State.abbr">
+        {{State.name}}
+      </mat-option>
+    </mat-select>
+    </mat-form-field>
 </div>
 
 <div id=submitButton>
-    <button mat-raised-button (click)="buttonPress()">Submit</button>
+  <button mat-raised-button (click)="buttonPress()">Submit</button>
 </div>
 
 <div class="center-div" id=graph style="width: 50%">
-    <canvas id="canvas"></canvas>
+  <canvas id="canvas"></canvas>
 </div>

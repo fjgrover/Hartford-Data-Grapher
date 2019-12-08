@@ -7,34 +7,29 @@ router.get( '/', async ( req, res ) => {
     try {
         console.log( req.connection.localAddress + ": request to " + req.originalUrl );
         const urlParams = await new URLSearchParams( req.query );
-        const x_var = urlParams.get( 'x_var' );
-        const y_var = urlParams.get( 'y_var' );
+        const queryRequest = urlParams.get( 'query' );
+        const strFilter = urlParams.get( 'state' );
+        filter = {}
 
-        var x_formatted = [];
-        var y_formatted = [];
+        var retVal = [];
 
-        if ( AutoCollisionClaim.schema.path( x_var ) )
-            x_collection = AutoCollisionClaim;
-        else
-            x_collection = DriverInfo;
+        if ( AutoCollisionClaim.schema.path( queryRequest ) ) {
+            collection = AutoCollisionClaim;
+            if( strFilter.trim() )
+                filter = { LOSS_LOC_ST_ABBR: strFilter };
+        } else {
+            collection = DriverInfo;
+            if ( strFilter.trim() )
+                filter = { INSD_MAIL_ST_ABBR: strFilter };
+        }
 
-        if( AutoCollisionClaim.schema.path( y_var ) )
-            y_collection = AutoCollisionClaim;
-        else
-            y_collection = DriverInfo;
-
-        var x_query = await x_collection.find( {}, `${x_var} -_id` );
-        var y_query = await y_collection.find( {}, `${y_var} -_id` );
-
-        x_query.forEach(element => {
-            x_formatted.push(element[x_var]);
-        });
-
-        y_query.forEach(element => {
-            y_formatted.push(element[y_var]);
+        var queryResult = await collection.find( filter, `${ queryRequest } -_id` );
+        
+        queryResult.forEach(element => {
+            retVal.push(element[queryRequest]);
         });
         
-        res.json( { 'x' : x_formatted, 'y' : y_formatted } );
+        res.json( { 'x' : retVal } );
 
     } catch ( err ) {
         res.json( { message: err } );

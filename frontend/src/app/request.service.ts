@@ -9,7 +9,7 @@ export class RequestService {
 
   constructor( private http: HttpClient ) { }
 
-  getData( xVar: string, yVar: string ): Observable< HttpResponse< IData > > {
-    return this.http.get< IData >( 'http://localhost:3000/get/?x_var=' + xVar + '&y_var=' + yVar, { observe: 'response' } );
+  getData( query: string, state: string ): Observable< HttpResponse< IData > > {
+    return this.http.get< IData >( 'http://localhost:3000/get/?query=' + query + '&state=' + state, { observe: 'response' } );
   }
 }

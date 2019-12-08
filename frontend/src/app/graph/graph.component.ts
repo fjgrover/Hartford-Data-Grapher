@@ -12,27 +12,22 @@ export class GraphComponent implements OnInit {
   private graph: Chart;
   private graphData: {
     x: {},
-    y: {}
   };
 
   constructor( public requestService: RequestService ) {  }
 
   ngOnInit() {  }
 
-  updateGraph( xVar: string, yVar: string ) {
+  updateGraph( query: string, state: string ) {
 
-    this.requestService.getData( xVar, yVar ).subscribe( res => {
+    this.requestService.getData( query, state ).subscribe( res => {
+      console.log(res);
       const xCounts = {};
       res.body.x.forEach( element => {
         xCounts[ element ] = 1 + ( xCounts[ element ] || 0);
       });
 
-      const yCounts = {};
-      res.body.y.forEach( element => {
-        yCounts[ element ] = 1 + ( yCounts[ element ] || 0);
-      });
-
-      this.graphData = { x : xCounts, y : yCounts };
+      this.graphData = { x : xCounts };
 
       if ( this.graph === undefined ) {
         this.graph = new Chart('canvas', {
@@ -48,11 +43,8 @@ export class GraphComponent implements OnInit {
         });
       }
 
-      console.log(Object.values(this.graphData.x));
-      console.log(Array.isArray(Object.values(this.graphData.x)));
-
       this.graph.data.labels = Object.keys(this.graphData.x);
-      this.graph.data.datasets[0].label = xVar;
+      this.graph.data.datasets[0].label = query;
       this.graph.data.datasets[0].data = Object.values(this.graphData.x);
       this.graph.update();
     });

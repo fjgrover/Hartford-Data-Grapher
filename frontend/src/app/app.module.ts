@@ -8,9 +8,11 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RequestService } from './request.service';
-import { MatSelectModule,
+import {
+  MatSelectModule,
   MatButtonModule,
-  MatToolbarModule } from '@angular/material';
+  MatToolbarModule
+} from '@angular/material';
 import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
