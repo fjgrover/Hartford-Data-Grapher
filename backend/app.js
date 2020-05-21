@@ -3,7 +3,7 @@ const cors = require( 'cors' );
 const mongoose = require( 'mongoose' );
 const app = express();
 
-require( 'dotenv' ).config();
+require('dotenv').config( { path: '../.env' } );
 
 app.use(express.json());
 
