@@ -1,7 +1,8 @@
 const express = require( 'express' );
-const router = express.Router();
 const AutoCollisionClaim = require( '../models/AutoCollisionClaim' );
 const DriverInfo = require( '../models/DriverInfo' );
+
+const router = express.Router();
 
 router.get( '/', async ( req, res ) => {
     try {
